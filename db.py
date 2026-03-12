@@ -10,13 +10,12 @@ from datetime import date, datetime
 from fastapi import HTTPException
 
 DB2_CONFIG = {
-    "dsn":      os.getenv("DB2_DSN", ""),
-    "host":     os.getenv("DB2_HOST", "localhost"),
-    "port":     os.getenv("DB2_PORT", "50000"),
-    "database": os.getenv("DB2_DATABASE", "MSBMTTO"),
-    "user":     os.getenv("DB2_USER", "db2inst1"),
-    "password": os.getenv("DB2_PASSWORD", ""),
-    "schema":   os.getenv("DB2_SCHEMA", "MSB"),
+    "host":     os.getenv("DB2_HOST"),
+    "port":     os.getenv("DB2_PORT"),
+    "database": os.getenv("DB2_DATABASE"),
+    "user":     os.getenv("DB2_USER"),
+    "password": os.getenv("DB2_PASSWORD"),
+    "schema":   os.getenv("DB2_SCHEMA"),
 }
 
 SCHEMA = DB2_CONFIG["schema"]
@@ -31,6 +30,7 @@ def get_db2_connection():
         f"PROTOCOL=TCPIP;"
         f"UID={DB2_CONFIG['user']};"
         f"PWD={DB2_CONFIG['password']};"
+        f"SECURITY=SSL;" 
     )
     try:
         return ibm_db.connect(conn_str, "", "")
