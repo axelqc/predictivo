@@ -21,10 +21,7 @@ from plan_predictivo import router as plan_router
 app = FastAPI(
     title="MSB Mantenimiento Inteligente API",
     description="API para análisis predictivo de fallas y mantenimiento basado en condición. Diseñada para ser consumida por watsonx Orchestrate como skills.",
-    version="1.0.0",
-    servers=[
-        {"url": os.getenv("API_BASE_URL", "http://localhost:8000"), "description": "Servidor principal"}
-    ],
+    version="1.0.0"
 )
 
 app.add_middleware(
